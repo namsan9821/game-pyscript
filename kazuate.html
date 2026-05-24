@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数当てゲーム</title>
+    <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+</head>
+
+<body style="text-align: center;">
+    <div style="padding:2em;">
+        <input id="user" type="text" placeholder="１から６の数字">
+        <button mpy-click="start">数当て</button><br>
+        <div id="result"></div>
+    </div>
+</body>
+<script type="mpy">
+import pyscript
+import js
+import random
+def start(event):
+    ans = random.randint(1,6)
+    user = pyscript.document.getElementById("user").value
+    if user == str(ans):
+        msg = f"あたり！答えは{ans}でした"
+        color = "red"
+    else:
+        msg = f"はずれ！答えは{ans}でした"
+        color = "blue"
+
+    result = pyscript.document.getElementById("result")
+    result.textContent = msg
+    result.style.color = color
+</script>
