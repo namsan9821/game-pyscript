@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数当てゲーム</title>
+    <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+    <style>
+        body { text-align: center; }
+        #disp { font-size:8em; color: white; }
+        #image_area { padding-top: 100px; }
+        #roulette {
+            width: 500px;
+            height: 500px;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body style="text-align: center;">
+    <div>
+        <button mpy-click="start">ルーレットを回す</button>
+    </div>
+    <div id="image_area">
+        <img id="roulette" src="roulette.png">
+    </div>
+    <div id="disp"></div>
+</body>
+
+<script type="mpy">
+import pyscript
+import js
+import random
+
+def start(event):
+    disp = pyscript.document.getElementById("disp")
+    disp.innerHTML = ""
+    roulette = pyscript.document.getElementById("roulette")
+    roulette.style.animation = "spin 1s linear infinite"
+    js.setTimeout(stop, 2000)
+
+def stop():
+    r = random.randint(0, 36)
+    if r == 0:
+        color = "green"
+    elif r % 2 == 0:
+        color = "black"
+    else:
+        color = "red"
+
+    disp = pyscript.document.getElementById("disp")
+    disp.innerHTML = f"<div style='background-color: {color}'>{r}</div>"
+    roulette = pyscript.document.getElementById("roulette")
+    roulette.style.animation = "none"
+</script>
