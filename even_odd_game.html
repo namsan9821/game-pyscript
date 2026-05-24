@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数当てゲーム</title>
+    <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+    <style>
+        button:focus { border: 2px solid blue; }
+        .ok { background-color: red; }
+        .ng { background-color: blue; }
+        .result { color: white; border-radius: 8px; padding: 0.5em }
+    </style>
+</head>
+
+<body style="text-align: center;">
+    <div style="padding:2em;">
+        <div>◆サイコロの目が偶数か奇数かを当ててください。</div>
+        <button mpy-click="check_even">偶数</button>
+        <button mpy-click="check_odd">奇数</button>
+        <div id="disp"></div>
+    </div>
+</body>
+<script type="mpy">
+import pyscript
+import js
+import random
+
+def check_even(event):
+    check(0, "偶数")
+
+def check_odd(event):
+    check(1, "奇数")
+
+def check(user, label):
+    dice = random.randint(1, 6)
+    dice_mod = dice % 2
+
+    if user == dice_mod:
+        msg = f"正解です(^o^)"
+        class_name = "ok"
+    else:
+        msg = f"残念でした(TへT)"
+        class_name = "ng"
+
+    disp = pyscript.document.getElementById("disp")
+    disp.innerHTML = (
+        f"<p class='result {class_name}'>"
+        f"  <u>{label}</u>を選択しました<br>"
+        f"  サイコロの目は{dice}でした<br>"
+        f"  <b>{msg}</b></p>"
+    )
+</script>
