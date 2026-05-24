@@ -1,19 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サイコロ</title>
     <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
-    <script type="mpy">
-        import pyscript
-        import js
-        import random
-        def show_dice(event):
-            r = random.randint(1,6)
-            disp = pyscript.document.getElementById("disp")
-            disp.innerText = str(r)
-    </script>
 </head>
 
 <body style="text-align: center;">
@@ -22,3 +14,12 @@
     </div>
     <div id="disp" style="font-size:8em;">-</div>
 </body>
+<script type="mpy">
+import pyscript
+import js
+import random
+def show_dice(event):
+    r = random.randint(1,6)
+    disp = pyscript.document.getElementById("disp")
+    disp.innerText = str(r)
+</script>
