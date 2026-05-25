@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>タイマー</title>
+    <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+</head>
+<body style="font-size: 8em;">
+    <div id="clock_div">00:00:00</div>
+</body>
+
+<script type="mpy">
+import pyscript
+import js
+import random
+
+def update_clock():
+    time_s = js.Date.new().toLocaleTimeString("ja-JP")
+    js.document.getElementById("clock_div").innerHTML = time_s
+    js.setTimeout(update_clock, 500)
+
+update_clock()
+</script>
