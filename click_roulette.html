@@ -36,12 +36,21 @@ import pyscript
 import js
 import random
 
+disp = pyscript.document.getElementById("disp")
+roulette = pyscript.document.getElementById("roulette")
+
 def start(event):
-    disp = pyscript.document.getElementById("disp")
     disp.innerHTML = ""
-    roulette = pyscript.document.getElementById("roulette")
     roulette.style.animation = "spin 1s linear infinite"
-    js.setTimeout(stop, 2000)
+    js.setTimeout(slow, 1000)
+
+def slow():
+    roulette.style.animation = "spin 2s linear infinite"
+    js.setTimeout(slow2, 1000)
+
+def slow2():
+    roulette.style.animation = "spin 4s linear infinite"
+    js.setTimeout(stop, 1000)
 
 def stop():
     r = random.randint(0, 36)
@@ -52,8 +61,6 @@ def stop():
     else:
         color = "red"
 
-    disp = pyscript.document.getElementById("disp")
     disp.innerHTML = f"<div style='background-color: {color}'>{r}</div>"
-    roulette = pyscript.document.getElementById("roulette")
     roulette.style.animation = "none"
 </script>
