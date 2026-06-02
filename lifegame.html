@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ライフゲーム</title>
+    <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+</head>
+
+<body style="text-align: center;">
+    <canvas id="canvas" width="400" height="400"></canvas>
+</body>
+<script type="mpy">
+import pyscript
+import js
+import random
+
+DEAD, ALIVE = 0, 1
+COLORS = ["white", "red"]
+SIZE = 20
+COLS = 400 // SIZE
+ROWS = 400 // SIZE
+
+canvas = js.document.getElementById("canvas")
+context = canvas.getContext("2d")
+
+cells = [ [ random.choice([DEAD, ALIVE]) for _ in range(COLS)]
+        for _ in range(ROWS)]
+
+def next_generation(cells):
+    new_cells = [[DEAD] * COLS for _ in range(ROWS)]
+
+    for y in range(ROWS):
+        for x in range(COLS):
+            count = count_alive_cells(cells, x, y)
+            if cells[y][x] == ALIVE:
+                if count == 2 or count == 3:
+                    new_cells[y][x] = ALIVE
+            else:
+                if count == 3:
+                    new_cells[y][x] = ALIVE
+
+    return new_cells
+
+def count_alive_cells(cells, x, y):
+    count = 0
+    for dy in [-1, 0, 1]:
+        for dx in [-1, 0, 1]:
+            if dy == 0 and dx == 0:
+                continue
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < COLS and 0 <= ny < ROWS:
+                count += cells[ny][nx]
+    return count
+
+def draw_canvas():
+    for y in range(ROWS):
+        for x in range(COLS):
+            color = COLORS[cells[y][x]]
+            context.fillStyle = color
+            context.fillRect(x * SIZE, y * SIZE, SIZE, SIZE)
+            context.strokeRect(x * SIZE, y * SIZE, SIZE, SIZE)
+
+def update():
+    global cells
+    cells = next_generation(cells)
+    draw_canvas()
+    js.setTimeout(update, 100)
+
+update()
+
+</script>
