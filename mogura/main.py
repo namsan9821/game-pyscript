@@ -35,9 +35,12 @@ def update_mogura():
 def update_screen():
     context.clearRect(0, 0, canvas.width, canvas.height)
 
+    hatake_img = document.getElementById("hatake_image")
+    context.drawImage(hatake_img, 0, 0, canvas.width, canvas.height)
+
     if not game["hide"]:
-        context.fillStyle = "brown"
-        context.fillRect(game["mx"], game["my"], WIDTH, WIDTH)
+        mogura_img = document.getElementById("mogura_image")
+        context.drawImage(mogura_img, game["mx"], game["my"], WIDTH, WIDTH)
 
     info.innerText = (f"スコア: {game['score']}点 /"
                       f"残り時間: {game['turns']}")
