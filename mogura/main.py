@@ -39,8 +39,8 @@ def update_screen():
         context.fillStyle = "brown"
         context.fillRect(game["mx"], game["my"], WIDTH, WIDTH)
 
-        info.innerText = (f"スコア: {game['score']}点 /"
-                          f"残り時間: {game['turns']}")
+    info.innerText = (f"スコア: {game['score']}点 /"
+                      f"残り時間: {game['turns']}")
 
 def game_over():
     info.innerText = f"モグラ叩き終了: スコア {game['score']}点"
